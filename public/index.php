@@ -12,8 +12,8 @@ Hola mundo
     
     este es un cambio
 
-    este es otro cambio 2
 
     este otro
 
+    otro cambio 6
 ?>
