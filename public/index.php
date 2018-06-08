@@ -9,5 +9,11 @@ Hola mundo
     //instanciar la clase controlador
     $iniciar = new Core;
     
+    
+    este es un cambio
+
+    este es otro cambio 2
+
+    este otro
 
 ?>
