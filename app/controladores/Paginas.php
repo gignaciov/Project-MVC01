@@ -8,7 +8,6 @@ requeriste paginas
             $this->articuloModelo = $this->modelo('Articulo');
 
             echo "controlador de paginas cargado";
-            print("controlador de paginas cargado");
             
         }
         public function index(){
@@ -32,5 +31,9 @@ requeriste paginas
 
         public function editar(){
 
-        }        
+        }
+        
+        public function error(){
+            $this->vista('paginas/error');
+        }
     }

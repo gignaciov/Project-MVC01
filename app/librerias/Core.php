@@ -8,13 +8,13 @@ requeriste Core.php
     // Ejemplo: /articulos/actualizar/4
 
     Class Core{
-        protected $controladorActual = 'paginas';
+        protected $controladorActual = 'Paginas';
         protected $metodoActual = 'index';
         protected $parametros = [];
-
+              
         //constructor : es un metodo especial que se carga automaticamente una vez instanciada la clase
         public function __construct(){
-            
+
             // print_r($this->getUrl());
             $url = $this->getUrl();
             
@@ -26,12 +26,16 @@ requeriste Core.php
                 // unset indice
                         //unset-> destruye una variable especificada
                 unset($url[0]);
+                
+                
+            }else{
+                $this->controladorActual= 'Problemas';
             }
+
             // requerir el controlador
             require_once '../app/controladores/'.$this->controladorActual.'.php';
             $this->controladorActual = new $this->controladorActual;
-
-
+            
             //chequear la segunda parte de la URL que seria el método
             if(isset($url[1])){
                 if(method_exists($this->controladorActual,$url[1])){
@@ -40,10 +44,12 @@ requeriste Core.php
                     // unset indice
                         //unset-> destruye una variable especificada
                     unset($url[1]);
+                }else{
+                    $this->metodoActual = 'error';
                 }
             }
-
-            echo $this->metodoActual;
+            // echo get_class($this->controladorActual);  //nombre del controlador actual
+            // echo $this->metodoActual;   //nombre del metodo actual
 
             //para probar traer método
 
@@ -58,15 +64,20 @@ requeriste Core.php
             // echo $_GET['url'];
 
             if(isset($_GET['url'])){
-                    //rtrim-> Retira los espacios en blanco (u otros caracteres) del final de un string
+                // echo $_GET['url'];  //$controladorActual/$metodoActual/$parametros
+                
+                //rtrim-> Retira los espacios en blanco (u otros caracteres) del final de un string
                 $url = rtrim($_GET['url'],'/');
+                //echo $url;  //   paginas/articulo
+
                 // para que esto sea interpretado, leido como una url
-                        //explode-> Divide un string en varios string
                 $url = filter_var($url, FILTER_SANITIZE_URL);
+                // echo $url;  //   paginas/articulo
+
+                //explode-> Divide un string en varios string
                 $url = explode('/',$url);
                 //para imprimir la url
-                // echo $_GET['url'];  //$controladorActual/$metodoActual/$parametros
-                // print_r ($url);
+                //print_r ($url); //    Array ( [0] => paginas [1] => articulo )
                 return $url;
             }
         }
